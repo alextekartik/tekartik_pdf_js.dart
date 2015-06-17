@@ -1,0 +1,22 @@
+<!doctype html>
+<html>
+
+<head>
+  <!-- In production, only one script (pdf.js) is necessary -->
+  <!-- In production, change the content of PDFJS.workerSrc below -->
+  <script src="packages/tekartik_pdf_js/js/pdf.js"></script>
+
+  <script>
+    // Specify the main script used to create a new PDF.JS web worker.
+    // In production, leave this undefined or change it to point to the
+    // combined `pdf.worker.js` file.
+    PDFJS.workerSrc = 'packages/tekartik_pdf_js/js/pdf.worker.js';
+  </script>
+  <script src="hello.js"></script>
+</head>
+
+<body>
+<canvas id="the-canvas" style="border:1px solid black;"/>
+</body>
+
+</html>
