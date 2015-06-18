@@ -3,7 +3,6 @@ library pdf_js.pdf;
 import 'dart:js' as js;
 import 'pdf_js.dart' as pdf_js;
 import 'dart:async';
-import 'dart:html';
 
 class PdfPageViewport {
   js.JsObject _jsObject;
