@@ -39,4 +39,13 @@ main() async {
   _msg("rendering");
   await page.render(renderContext);
   querySelector('#output').text = 'rendering done...';
+  print(canvas.toDataUrl());
+
+  var pom = document.createElement('a');
+  pom.setAttribute('href', canvas.toDataUrl());
+  pom.setAttribute('download', "image.png");
+  pom.innerHtml = "Download";
+
+  //pom.style.display = 'none';
+  document.body.append(pom);
 }

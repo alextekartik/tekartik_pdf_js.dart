@@ -64,3 +64,14 @@ Future getDocument(String url) async {
   Pdf pdf = new Pdf(await promise.future);
   return pdf;
 }
+
+Future<Pdf> getPdf({String url, var data}) async {
+  Promise promise;
+  if (data != null) {
+    promise = new Promise(js.context['PDFJS'].callMethod('getDocument', [data]));
+  } else {
+    promise = new Promise(js.context['PDFJS'].callMethod('getDocument', [url]));
+  }
+  Pdf pdf = new Pdf(await promise.future);
+  return pdf;
+}

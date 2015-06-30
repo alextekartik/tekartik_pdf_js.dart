@@ -7,8 +7,9 @@ import 'dart:async';
 class PdfPageViewport {
   js.JsObject _jsObject;
   PdfPageViewport(this._jsObject);
-  int get width => _jsObject['width'];
-  int get height => _jsObject['height'];
+  // might not be int
+  num get width => _jsObject['width'];
+  num get height => _jsObject['height'];
 }
 
 class PdfPage {
