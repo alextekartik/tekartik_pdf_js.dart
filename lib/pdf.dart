@@ -1,42 +1,49 @@
 library pdf_js.pdf;
 
-import 'dart:js' as js;
-import 'pdf_js.dart' as pdf_js;
 import 'dart:async';
+import 'dart:js' as js;
+
+import 'pdf_js.dart' as pdf_js;
 
 class PdfPageViewport {
-  js.JsObject _jsObject;
+  final js.JsObject _jsObject;
   PdfPageViewport(this._jsObject);
   // might not be int
-  num get width => _jsObject['width'];
-  num get height => _jsObject['height'];
+  num get width => _jsObject['width'] as num;
+  num get height => _jsObject['height'] as num;
 }
 
 class PdfPage {
-  js.JsObject _jsObject;
+  final js.JsObject _jsObject;
   PdfPage(this._jsObject);
   PdfPageViewport getViewport(num scale) {
-    PdfPageViewport viewPort = new PdfPageViewport(_jsObject.callMethod('getViewport', [scale]));
+    var viewPort = PdfPageViewport(
+        _jsObject.callMethod('getViewport', [scale]) as js.JsObject);
     return viewPort;
   }
+
   Future render(RenderParameters params) {
-    pdf_js.Promise promise = new pdf_js.Promise(_jsObject.callMethod('render', [params._jsObject]));
+    var promise = pdf_js.Promise(
+        _jsObject.callMethod('render', [params._jsObject]) as js.JsObject);
     return promise.future;
   }
 }
 
 class RenderParameters {
-  js.JsObject _jsObject = new js.JsObject.jsify({});
-  set viewport(PdfPageViewport viewport) => _jsObject['viewport'] = viewport._jsObject;
-  set canvasContext(var canvasContext) => _jsObject['canvasContext'] = canvasContext;
+  final js.JsObject _jsObject = js.JsObject.jsify({});
+  set viewport(PdfPageViewport viewport) =>
+      _jsObject['viewport'] = viewport._jsObject;
+  set canvasContext(Object canvasContext) =>
+      _jsObject['canvasContext'] = canvasContext;
 }
+
 class Pdf {
-  js.JsObject _jsObject;
+  final js.JsObject _jsObject;
   Pdf(this._jsObject);
-  Future getPage(int pageNum) async {
-    pdf_js.Promise promise = new pdf_js.Promise(_jsObject.callMethod('getPage', [pageNum]));
-    PdfPage page = new PdfPage(await promise.future);
+  Future<PdfPage> getPage(int pageNum) async {
+    var promise = pdf_js.Promise(
+        _jsObject.callMethod('getPage', [pageNum]) as js.JsObject);
+    var page = PdfPage((await promise.future) as js.JsObject);
     return page;
   }
-
 }

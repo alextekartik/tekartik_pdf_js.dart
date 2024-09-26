@@ -1,14 +1,16 @@
 name: 'tekartik_pdf_js'
-version: 0.0.1
-description: An absolute bare-bones web app.
-#author: <your name> <email@example.com>
-#homepage: https://www.example.com
+version: 1.0.0
+description: Pdf js for the web
+publish_to: none
 environment:
-  sdk: '>=1.0.0 <2.0.0'
+  sdk: ^3.5.0
 dependencies:
-  browser: '>=0.10.0 <0.11.0'
-  tekartik_utils:
-    git: git://github.com/alextekartik/tekartik_utils.dart
   path: any
+  tekartik_browser_utils:
+    git:
+      url: https://github.com/tekartik/browser_utils.dart
+      ref: dart3a
 dev_dependencies:
   test: any
+  build_web_compilers:
+  build_runner:
