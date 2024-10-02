@@ -1,4 +1,4 @@
-library pdf_js.pdf;
+library;
 
 import 'dart:async';
 import 'dart:js' as js;
